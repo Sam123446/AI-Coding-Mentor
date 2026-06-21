@@ -20,7 +20,7 @@ function Interview() {
         try {
 
             const response = await axios.post(
-                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/interview/question",
+                "https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/interview/question",
                 {
                     problem: topic
                 }
@@ -48,7 +48,7 @@ function Interview() {
         try {
 
             const response = await axios.post(
-                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/interview/evaluate",
+                "https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/interview/evaluate",
                 {
                     question,
                     answer

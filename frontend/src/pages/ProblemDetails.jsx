@@ -20,7 +20,7 @@ function ProblemDetails() {
     useEffect(() => {
 
         axios
-            .get(`http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/problems/${id}`)
+            .get(`https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/problems/${id}`)
             .then((response) => {
                 setProblem(response.data);
             })
@@ -40,7 +40,7 @@ function ProblemDetails() {
             setLoadingAI(true);
 
             const response = await axios.post(
-                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/guidance",
+                "https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/guidance",
                 {
                     problem: `
 Title: ${problem.title}
@@ -83,7 +83,7 @@ ${problem.hint}
         try {
 
             const response = await axios.post(
-                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/visualize",
+                "https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/visualize",
                 {
                     problem: `
 Title: ${problem.title}

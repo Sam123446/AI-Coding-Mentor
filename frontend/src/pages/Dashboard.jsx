@@ -13,7 +13,7 @@ function Dashboard() {
 
         axios
             .get(
-                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/progress/count/1"
+                "https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/progress/count/1"
             )
             .then((response) => {
 
