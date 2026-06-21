@@ -26,7 +26,7 @@ function Practice() {
             setLoadingReview(true);
 
             const response = await axios.post(
-                "http://localhost:8080/api/ai/review",
+                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/review",
                 {
                     language,
                     code
@@ -58,7 +58,7 @@ function Practice() {
             setLoadingCorrect(true);
 
             const response = await axios.post(
-                "http://localhost:8080/api/ai/correct",
+                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/correct",
                 {
                     language,
                     code
@@ -94,7 +94,7 @@ const runCode = async () => {
 
         const response =
             await axios.post(
-                "http://localhost:8080/api/ai/run",
+                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/run",
                 {
                     language,
                     code

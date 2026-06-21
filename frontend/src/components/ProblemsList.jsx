@@ -10,7 +10,7 @@ function ProblemsList() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8080/api/problems")
+            .get("http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/problems")
             .then((response) => {
                 setProblems(response.data);
             })

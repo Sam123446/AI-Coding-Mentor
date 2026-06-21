@@ -20,7 +20,7 @@ function AIMentor() {
             setLoading(true);
 
             const response = await axios.post(
-                "http://localhost:8080/api/ai/guidance",
+                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/guidance",
                 {
                     problem: problem
                 }
@@ -51,7 +51,7 @@ function AIMentor() {
         try {
 
             const response = await axios.post(
-                "http://localhost:8080/api/ai/visualize",
+                "http://https://p01--ai-coding-mentor--ddgq69l8mqk5.code.run/api/ai/visualize",
                 {
                     problem: problem
                 }
