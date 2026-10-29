@@ -387,38 +387,141 @@ Code:
 
         return askGemini(prompt);
     }
-    public String visualizeProblem(
-            String problem) {
+
+    public String visualizeProblem(String problem) {
 
         String prompt = """
-            You are a coding mentor.
+        You are an expert coding tutor and a general-purpose
+        algorithm visualization engine.
 
-            Analyze this coding problem:
+        Analyze the exact problem submitted by the user.
 
-            %s
+        USER PROBLEM:
+        %s
 
-            Return in this format:
+        Return ONLY valid JSON. Do not include Markdown,
+        explanations outside the JSON, or code fences.
 
-            📂 Problem Type
-            - Array / String / Tree / Graph / DP etc.
+        Return this structure:
 
-            📊 Visualization
-            - Show a simple visual representation
+        {
+          "problemType": "Detected problem category",
+          "title": "Short descriptive title",
+          "summary": "What the problem asks",
+          "diagram": {
+            "type": "array",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Element label",
+                "detail": "Element value or explanation"
+              }
+            ],
+            "connections": [
+              {
+                "from": "n1",
+                "to": "n2",
+                "label": "Relationship"
+              }
+            ]
+          },
+          "steps": [
+            {
+              "number": 1,
+              "title": "Step title",
+              "explanation": "What happens in this step",
+              "state": [
+                {
+                  "id": "n1",
+                  "label": "Element",
+                  "value": "Actual value",
+                  "status": "active"
+                }
+              ]
+            }
+          ],
+          "keyObservation": "Important conclusion"
+        }
 
-            ▶ Dry Run
-            - Step 1
-            - Step 2
-            - Step 3
+        RULES:
 
-            💡 Key Observation
-            - One important insight
+        1. Support arbitrary coding problems, including arrays,
+           strings, searching, sorting, linked lists, trees,
+           graphs, recursion, dynamic programming, SQL,
+           object-oriented programming, and other concepts.
 
-            Keep it beginner friendly.
-            """
-                .formatted(problem);
+        2. Determine the appropriate diagram type from the actual
+           problem. Never assume that every problem is an array.
 
-        return askGemini(prompt);
+        3. Use actual input values when provided. If the problem
+           has no sample input, create a small illustrative example
+           and explicitly label it as illustrative.
+
+        4. Generate meaningful, ordered steps for the example.
+           Include relevant comparisons, decisions, state changes,
+           intermediate results, and final output.
+
+        5. Keep values and states consistent across steps.
+           Never invent a result that contradicts the problem.
+
+        6. Use diagram types such as:
+           array, linkedList, stack, queue, tree, graph,
+           flowchart, table, recursion, dpTable, sequence,
+           or generic.
+
+        7. For SQL, visualize tables, rows, filtering, joins,
+           grouping, or query results when relevant.
+
+        8. For recursion, show calls and returns where relevant.
+           For dynamic programming, show states and transitions.
+           For graphs, show vertices and edges.
+           For conceptual questions, show relationships or
+           a flowchart rather than an unrelated dry run.
+
+        9. Every connection must reference existing node IDs.
+           Use unique IDs for nodes.
+
+        10. Every step's state must describe the values at that
+            stage. Use status values such as active, compared,
+            completed, result, or normal.
+
+        11. Include the final answer or result when applicable.
+            If the problem lacks enough information to determine
+            a unique result, state the limitation in the summary.
+
+        12. Keep explanations beginner-friendly.
+
+        13. Ensure the output is valid JSON. Escape quotation
+            marks and special characters correctly.
+
+        14. Do not add properties outside the specified structure.
+        """.formatted(problem);
+
+        String response = askGemini(prompt);
+
+        // Preserve a readable response if the AI provider is unavailable.
+        if (response == null
+                || response.isBlank()
+                || response.equalsIgnoreCase("AI Service Unavailable")) {
+            return """
+            {
+              "problemType": "Unavailable",
+              "title": "Visualization unavailable",
+              "summary": "The AI service could not generate a visualization. Please try again.",
+              "diagram": {
+                "type": "generic",
+                "nodes": [],
+                "connections": []
+              },
+              "steps": [],
+              "keyObservation": "Try again when the AI service is available."
+            }
+            """;
+        }
+
+        return response.trim();
     }
+
     public String generateInterviewQuestion(
             String topic) {
 
